@@ -1,6 +1,7 @@
 plugins {
 	id 'org.springframework.boot' version '2.2.0.M2'
 	id 'java'
+	id "org.flywaydb.flyway" version "5.2.4"
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -23,5 +24,16 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	// https://mvnrepository.com/artifact/postgresql/postgresql
 	compile group: 'org.postgresql', name: 'postgresql', version:  '42.2.5'
+	// https://mvnrepository.com/artifact/org.flywaydb/flyway-gradle-plugin
+	runtime group: 'org.flywaydb', name: 'flyway-gradle-plugin', version: '4.2.0'
+	compileOnly 'org.projectlombok:lombok:1.18.6'
+	annotationProcessor 'org.projectlombok:lombok:1.18.6'
 
+}
+
+flyway {
+	url = 'jdbc:postgresql://localhost:5432/postgres'
+	user = 'postgres'
+	password = '46e7v6bbn7y'
+	schemas = ['public']
 }
