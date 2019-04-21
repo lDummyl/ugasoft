@@ -14,7 +14,7 @@ public class Receiver {
     }
 
     /*The the server could be stopped before it receives all messages
-     from the rabbit, so until the sender’s initial delay, we mark all messages
+     from the rabbit, so until the sender’s start after init delay, we mark all messages
      as coming from another session, however, this does not guarantee
      that the delay will be sufficient for the messages to not begin
      to mix(new send and from previous sessions). The guaranteed solution

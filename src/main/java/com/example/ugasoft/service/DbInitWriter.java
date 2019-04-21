@@ -25,7 +25,7 @@ public class DbInitWriter {
         this.recordsRepository = recordsRepository;
     }
 
-    void write() {
+    public void write() {
         List<Record> generatedRecords = Stream.generate(() -> new Record(RandomStringUtils.randomAscii(wordSize)))
                 .limit(initMessageQty).collect(Collectors.toList());
         recordsRepository.saveAll(generatedRecords);

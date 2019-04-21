@@ -27,7 +27,7 @@ public class ScheduledRunner {
     private CountDownLatch latch;
 
     @Value("${messages.to-send.qty}")
-    private int messagesQty;
+    public int messagesQty;
     @Value("${messages.to-send.timeout.receive-checkout}")
     private int receiveCheckoutTimeout;
 
@@ -56,12 +56,11 @@ public class ScheduledRunner {
         String message = record.getValue();
 
         for (int i = 0; i < messagesQty; i++) {
-            rabbitTemplate.convertAndSend(MainConfig.topicExchangeName,
+            rabbitTemplate.convertAndSend(MainConfig.SPRING_BOOT_EXCHANGE,
                     "foo.bar.baz", message);
         }
 
         boolean receivedInTime = latch.await(receiveCheckoutTimeout, timeUnit);
-
         if (receivedInTime) {
             log.info("Receivers got all {} messages", messagesQty);
         } else {
@@ -70,7 +69,7 @@ public class ScheduledRunner {
         }
     }
 
-    public CountDownLatch getLatch() {
+    CountDownLatch getLatch() {
         return latch;
     }
 }

@@ -10,7 +10,6 @@ import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -23,9 +22,9 @@ import javax.annotation.PostConstruct;
 @Configuration
 public class MainConfig {
 
-    public static final String topicExchangeName = "spring-boot-exchange";
+    public static final String SPRING_BOOT_EXCHANGE = "spring-boot-exchange";
 
-    static final String queueName = "spring-boot";
+    static final String QUEUE_NAME = "spring-boot";
 
     private ApplicationContext context;
     private ConnectionFactory connectionFactory;
@@ -44,12 +43,12 @@ public class MainConfig {
 
     @Bean
     Queue queue() {
-        return new Queue(queueName, false);
+        return new Queue(QUEUE_NAME, false);
     }
 
     @Bean
     TopicExchange exchange() {
-        return new TopicExchange(topicExchangeName);
+        return new TopicExchange(SPRING_BOOT_EXCHANGE);
     }
 
     @Bean
@@ -68,7 +67,7 @@ public class MainConfig {
                             .addPropertyValue("messageListener", listenerAdapter)
                             .getBeanDefinition());
             SimpleMessageListenerContainer listener = (SimpleMessageListenerContainer) context.getBean("listener" + i);
-            listener.setQueueNames(queueName);
+            listener.setQueueNames(QUEUE_NAME);
         }
     }
 }

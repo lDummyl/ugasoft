@@ -24,9 +24,9 @@ messages:
     length: 10
     qty: 10
   to-send:
-    qty: 3
+    qty: 10
     timeout:
       receive-checkout: 1
 
 receivers:
-  qty: 3
+  qty: 5
