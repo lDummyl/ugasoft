@@ -18,3 +18,12 @@ demo.datasource:
   password: 46e7v6bbn7y
   driver-class-name: org.postgresql.Driver
 
+
+messages:
+  generated:
+    length: 10
+    qty: 10
+  to-send:
+    qty: 3
+    timeout:
+      receive-checkout: 1
