@@ -27,3 +27,6 @@ messages:
     qty: 3
     timeout:
       receive-checkout: 1
+
+receivers:
+  qty: 3

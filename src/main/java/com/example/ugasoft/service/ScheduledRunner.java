@@ -1,6 +1,6 @@
 package com.example.ugasoft.service;
 
-import com.example.ugasoft.UgasoftApplication;
+import com.example.ugasoft.config.MainConfig;
 import com.example.ugasoft.data.entity.Record;
 import com.example.ugasoft.data.repo.RecordsRepository;
 import com.example.ugasoft.exception.UgaException;
@@ -56,17 +56,17 @@ public class ScheduledRunner {
         String message = record.getValue();
 
         for (int i = 0; i < messagesQty; i++) {
-            rabbitTemplate.convertAndSend(UgasoftApplication.topicExchangeName,
+            rabbitTemplate.convertAndSend(MainConfig.topicExchangeName,
                     "foo.bar.baz", message);
         }
 
         boolean receivedInTime = latch.await(receiveCheckoutTimeout, timeUnit);
 
         if (receivedInTime) {
-            log.info("All receivers got {} messages", messagesQty);
+            log.info("Receivers got all {} messages", messagesQty);
         } else {
-            throw new UgaException(String.format("Only %d messages of %d has been received in timeout %d %s",
-                    latch.getCount(), messagesQty, receiveCheckoutTimeout, timeUnit));
+            throw new UgaException(String.format("%d messages of %d has been received in timeout %d %s",
+                    messagesQty - latch.getCount(), messagesQty, receiveCheckoutTimeout, timeUnit));
         }
     }
 
