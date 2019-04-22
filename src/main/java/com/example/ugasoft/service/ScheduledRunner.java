@@ -4,6 +4,7 @@ import com.example.ugasoft.config.MainConfig;
 import com.example.ugasoft.data.entity.Record;
 import com.example.ugasoft.data.repo.RecordsRepository;
 import com.example.ugasoft.exception.UgaException;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +18,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
+@Setter
 @Service
 @EnableScheduling
 public class ScheduledRunner {
