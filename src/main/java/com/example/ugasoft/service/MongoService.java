@@ -44,5 +44,7 @@ public class MongoService {
         int timestamp = new ObjectId(petroff.getId()).getTimestamp();
         log.info(LocalDateTime.ofInstant(Instant.ofEpochSecond(timestamp),
                 TimeZone.getDefault().toZoneId()).toString());
+        List<Profile> freds = profileRepository.findAllByFirstNameLike("fred");
+        System.out.println(freds);
     }
 }
