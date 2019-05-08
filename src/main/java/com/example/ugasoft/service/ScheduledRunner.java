@@ -48,7 +48,7 @@ public class ScheduledRunner {
         dbInitWriter.write();
     }
 
-    @Scheduled(fixedDelay = 5000, initialDelay = 500)
+//    @Scheduled(fixedDelay = 5000, initialDelay = 500)
     public void run() throws InterruptedException {
 
         log.info("Sending {} messages...", messagesQty);
